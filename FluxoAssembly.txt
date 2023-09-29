@@ -1,0 +1,16 @@
+#Processos de Execução Assembly
+
+## Edição
+  Texto
+  ** retorna arquivo fonte (.s, .asm)
+
+## Montagem
+  -$ nasm -f elf64 nomeArquivo.s
+  ** retorna um objeto (nomeArquivo.o)
+
+## Ligação
+  -$ ld nomeArquivo.o -o nomeArquivo
+  ** retorna um executavel (nomeArquivo)
+
+## Execução
+  -$ ./nomeArquivo
