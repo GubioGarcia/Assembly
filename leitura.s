@@ -31,7 +31,8 @@ segment .text
         mov eax, 4
         mov ebx, 1
         mov ecx, buf
-        mov edx, ncar
+        mov edx, [ncar]
+        int 80h
         
         mov eax, 1 ;exit
         int 80h
