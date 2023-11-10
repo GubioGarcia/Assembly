@@ -1,4 +1,4 @@
-;cripyo.s
+;cripto.s
 segment .data
 mens db "Entre com uma string", 10
 tam equ $-mens
