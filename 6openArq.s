@@ -2,10 +2,12 @@
 segment .data
     nomearq db "teste", 0
     mensf db "Falha na abertura do arquivo", 10
-    tam equ $-mensf
+    tam1 equ $-mensf
+    menssucess db "Sucesso na abertura do arquivo", 10
+    tam2 equ $-mensf
 
 segment .bss
-    fd1 resb 1 ;descritor do arquivo
+    fd1 resd 1 ;descritor do arquivo
     
 segment .text
     global _start
@@ -22,23 +24,22 @@ segment .text
         cmp eax, 0
         jl erroabrir
         
+        ;bloco para armazenar o descritor do arquivo
         mov [fd1], al
-        
-        ;bloco para impressao do descritor do arquivo
         add [fd1], byte 48
+
         mov eax, 4
         mov ebx, 1
-        mov ecx, fd1
-        mov edx, 1
-        
+        mov ecx, menssucess
+        mov edx, tam2
         int 80h
-        jmp fim
+        jp fim
         
         erroabrir: ;imprimir mens de falha 
         mov eax, 4
         mov ebx, 1
         mov ecx, mensf
-        mov edx, tam
+        mov edx, tam1
         int 80h
         
         fim:

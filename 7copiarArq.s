@@ -2,8 +2,10 @@
 segment .data
     nomearq db "teste", 0
     arqdest db "dest", 0
-    mensf db "Falha no arquivo", 10
-    tam equ $-mensf
+    mensfabrir db "Falha na abertura do arquivo", 10
+    tam1 equ $-mensfabrir
+    mensfcriar db "Falha na criacao do arquivo", 10
+    tam2 equ $-mensfcriar
 
 segment .bss
     fd1 resd 1 ;descritor do arquivo
@@ -26,11 +28,6 @@ segment .text
         cmp eax, 0
         jl erroabrir
         mov [fd1], eax
-        mov eax, 4
-        mov ebx, 1
-        mov ecx, fd1
-        mov edx, 1
-        int 80h
         
         ;bloco criação de arquivo
         mov eax, 8
@@ -58,16 +55,16 @@ segment .text
         erroabrir: ;imprimir mens de falha 
         mov eax, 4
         mov ebx, 1
-        mov ecx, mensf
-        mov edx, tam
+        mov ecx, mensfabrir
+        mov edx, tam1
         int 80h
         jp fim
         
         errocriar:
         mov eax, 4
         mov ebx, 1
-        mov ecx, mensf
-        mov edx, tam
+        mov ecx, mensfcriar
+        mov edx, tam2
         int 80h
         
         fim:
